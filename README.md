@@ -1,7 +1,7 @@
 # JJPluralForm
 by Lin Junjie ([@jjlin](http://twitter.com/jjlin))
 
-[[JJPluralForms.png]]
+![JJPluralForm Example Project Screenshot](https://github.com/junjie/JJPluralForm/raw/master/JJPluralForms.png)
 
 ## What is JJPluralForm?
 
