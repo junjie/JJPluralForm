@@ -120,7 +120,7 @@
 			// 1) is 1
 			// 2) is 2
 			// 3) everything else
-			return n != 1 ? 1 : 0;
+			return n==1 ? 0 : (n==2 ? 1 : 2);
 			break;
 		}
 			
