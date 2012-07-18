@@ -1,30 +1,13 @@
 //
 //  JJPluralForm.h
-//  JJPluralFormExample
+//  JJPluralForm
 //
-//  Created by Lin Junjie on 18/7/12.
+//  Created by Lin Junjie (Clean Shaven Apps Pte. Ltd.) on 18/7/12.
 //  Copyright (c) 2012 Lin Junjie. All rights reserved.
-//
-//
-//  In English, a word can either be singular or plural (e.g. 1 day, 2 days, 10
-//  days). Some languages like Chinese have only one form (eg. 1 天, 2 天, 10 天),
-//  while others like Russian have three (1 день, 2 дня, 10 дней).
-//
-//  Mozilla has codified a set of 17 plural rules across all languages. The
-//  rules can be found over here:
-//  https://developer.mozilla.org/en/Localization_and_Plurals
-//
-//  Certain plural rules have been extended to include additional plural rules.
-//  For example, even though Chinese usually have only one plural form, some
-//  scenarios call for up to three different plural forms.
-//
-//  For example, the phrase 'Every N months' can be localized in English as
-//  'Every 1 month', 'Every 2 months' and 'Every 6 months'. Or more naturally,
-//  it can be localized as 'Monthly', 'Every 2 months' and 'Every 6 months'.
-//
-//  In Chinese, this would be '每月', '每两个月' and '每 6 个月'. A single plural form
-//  would result in an unnatural sounding phrase such as '每 2 个月' to a native
-//  speaker.
+//  
+//  This Source Code Form is subject to the terms of the Mozilla Public
+//  License, v. 2.0. If a copy of the MPL was not distributed with this
+//  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #import <Foundation/Foundation.h>
 
@@ -148,7 +131,7 @@
 // 	  1) ends in 1, excluding 11
 // 	  2) everything else
 //
-// Extended Rules
+// EXTENDED RULES
 //
 // Rule #100, extended from 1 to 3 forms
 // Mostly Asian, e.g. Chinese, Japanese, Korean, Vietnamese, Thai, Lao. Swedish
