@@ -7,16 +7,16 @@
 */
 
 // Specifies the plural rule form for this language
-// Rule #100, extended from 1 to 3 forms
-// Extended Chinese
-// 	  1) is 1
-// 	  2) is 2
+// Rule #7, 3 forms
+// Russian
+// 	  1) ends in 1, excluding 11
+// 	  2) ends in 2-4, excluding 12-14
 // 	  3) everything else
 "JJ_PLURAL_FORM_RULE" =
-"100";
+"7";
 
 "N_DAYS_PLURAL_STRING" =
-"%@ 天;%@ 天;%@ 天";
+"%@ день;%@ дня;%@ дней";
 
 "EVERY_N_DAYS_PLURAL_STRING" =
-"每天;每两天;每 %@ 天";
+"Каждый %@ день;Каждые %@ дня;Каждые %@ дней";
