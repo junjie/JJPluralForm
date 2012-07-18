@@ -1,0 +1,18 @@
+/* 
+  Localizable.strings
+  JJPluralFormExample
+
+  Created by Lin Junjie on 18/7/12.
+  Copyright (c) 2012 Lin Junjie. All rights reserved.
+*/
+
+// Specifies the plural rule form for this language
+// Set to 1 for English
+"JJ_PLURAL_FORM_RULE" =
+"1";
+
+"N_DAYS_PLURAL_STRING" =
+"%@ day;%@ days";
+
+"EVERY_N_DAYS_PLURAL_STRING" =
+"Daily;Every %@ days";

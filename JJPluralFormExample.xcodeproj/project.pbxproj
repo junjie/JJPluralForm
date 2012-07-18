@@ -13,8 +13,9 @@
 		B35C49E315B69B0000ED5A08 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B35C49E115B69B0000ED5A08 /* InfoPlist.strings */; };
 		B35C49E515B69B0000ED5A08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B35C49E415B69B0000ED5A08 /* main.m */; };
 		B35C49E915B69B0000ED5A08 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B35C49E815B69B0000ED5A08 /* AppDelegate.m */; };
-		B35C49EC15B69B0000ED5A08 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B35C49EB15B69B0000ED5A08 /* ViewController.m */; };
-		B35C49EF15B69B0000ED5A08 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B35C49ED15B69B0000ED5A08 /* ViewController.xib */; };
+		B35C49F715B69B1C00ED5A08 /* JJPluralForm.m in Sources */ = {isa = PBXBuildFile; fileRef = B35C49F615B69B1C00ED5A08 /* JJPluralForm.m */; };
+		B35C49FB15B6B97600ED5A08 /* LocalizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B35C49FA15B6B97600ED5A08 /* LocalizationViewController.m */; };
+		B35C49FE15B6BC5E00ED5A08 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B35C4A0015B6BC5E00ED5A08 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,9 +29,11 @@
 		B35C49E615B69B0000ED5A08 /* JJPluralFormExample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JJPluralFormExample-Prefix.pch"; sourceTree = "<group>"; };
 		B35C49E715B69B0000ED5A08 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B35C49E815B69B0000ED5A08 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		B35C49EA15B69B0000ED5A08 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		B35C49EB15B69B0000ED5A08 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		B35C49EE15B69B0000ED5A08 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		B35C49F515B69B1C00ED5A08 /* JJPluralForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JJPluralForm.h; path = JJPluralForm/JJPluralForm.h; sourceTree = "<group>"; };
+		B35C49F615B69B1C00ED5A08 /* JJPluralForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JJPluralForm.m; path = JJPluralForm/JJPluralForm.m; sourceTree = "<group>"; };
+		B35C49F915B6B97600ED5A08 /* LocalizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalizationViewController.h; sourceTree = "<group>"; };
+		B35C49FA15B6B97600ED5A08 /* LocalizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalizationViewController.m; sourceTree = "<group>"; };
+		B35C49FF15B6BC5E00ED5A08 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +53,7 @@
 		B35C49C915B69B0000ED5A08 = {
 			isa = PBXGroup;
 			children = (
+				B35C49F815B69B2200ED5A08 /* JJPluralForm */,
 				B35C49DE15B69B0000ED5A08 /* JJPluralFormExample */,
 				B35C49D715B69B0000ED5A08 /* Frameworks */,
 				B35C49D515B69B0000ED5A08 /* Products */,
@@ -79,9 +83,9 @@
 			children = (
 				B35C49E715B69B0000ED5A08 /* AppDelegate.h */,
 				B35C49E815B69B0000ED5A08 /* AppDelegate.m */,
-				B35C49EA15B69B0000ED5A08 /* ViewController.h */,
-				B35C49EB15B69B0000ED5A08 /* ViewController.m */,
-				B35C49ED15B69B0000ED5A08 /* ViewController.xib */,
+				B35C49F915B6B97600ED5A08 /* LocalizationViewController.h */,
+				B35C49FA15B6B97600ED5A08 /* LocalizationViewController.m */,
+				B35C4A0015B6BC5E00ED5A08 /* Localizable.strings */,
 				B35C49DF15B69B0000ED5A08 /* Supporting Files */,
 			);
 			path = JJPluralFormExample;
@@ -96,6 +100,15 @@
 				B35C49E615B69B0000ED5A08 /* JJPluralFormExample-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B35C49F815B69B2200ED5A08 /* JJPluralForm */ = {
+			isa = PBXGroup;
+			children = (
+				B35C49F515B69B1C00ED5A08 /* JJPluralForm.h */,
+				B35C49F615B69B1C00ED5A08 /* JJPluralForm.m */,
+			);
+			name = JJPluralForm;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,7 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B35C49E315B69B0000ED5A08 /* InfoPlist.strings in Resources */,
-				B35C49EF15B69B0000ED5A08 /* ViewController.xib in Resources */,
+				B35C49FE15B6BC5E00ED5A08 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,7 +176,8 @@
 			files = (
 				B35C49E515B69B0000ED5A08 /* main.m in Sources */,
 				B35C49E915B69B0000ED5A08 /* AppDelegate.m in Sources */,
-				B35C49EC15B69B0000ED5A08 /* ViewController.m in Sources */,
+				B35C49F715B69B1C00ED5A08 /* JJPluralForm.m in Sources */,
+				B35C49FB15B6B97600ED5A08 /* LocalizationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,12 +192,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		B35C49ED15B69B0000ED5A08 /* ViewController.xib */ = {
+		B35C4A0015B6BC5E00ED5A08 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B35C49EE15B69B0000ED5A08 /* en */,
+				B35C49FF15B6BC5E00ED5A08 /* en */,
 			);
-			name = ViewController.xib;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
