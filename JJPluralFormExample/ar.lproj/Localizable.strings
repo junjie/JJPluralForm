@@ -1,0 +1,24 @@
+/* 
+  Localizable.strings
+  JJPluralFormExample
+
+  Created by Lin Junjie on 18/7/12.
+  Copyright (c) 2012 Lin Junjie. All rights reserved.
+*/
+
+// Rule #12, 5 forms
+// Arabic
+// 	  1) is 1
+// 	  2) is 2
+// 	  3) ends in 03-10
+// 	  4) everything else but 0, ends in 00-02, excluding 0-2
+// 	  5) ends in 00-02, excluding 0-2
+// 	  6) is 0
+"JJ_PLURAL_FORM_RULE" =
+"12";
+
+"N_DAYS_PLURAL_STRING" =
+"يوم %@;يومين %@;أيام %@;يوم %@;أيام;يوم %@";
+
+"EVERY_N_DAYS_PLURAL_STRING" =
+"يومياً;كل %@ يومين;كل %@ أيام;كل %@ يوم;كل %@ أيام;كل %@ يوم";
