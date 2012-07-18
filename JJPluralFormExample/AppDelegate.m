@@ -11,11 +11,14 @@
 
 #import "AppDelegate.h"
 #import "LocalizationViewController.h"
+#import "JJPluralForm.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+	[[JJPluralForm sharedManager] setPluralRule:[kJJPluralFormRule integerValue]];
+	
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	self.viewController = [[LocalizationViewController alloc] initWithStyle:UITableViewStylePlain];
 	self.window.rootViewController = self.viewController;

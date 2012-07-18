@@ -23,7 +23,6 @@ static NSString *CellIdentifier = @"Cell";
 {
     self = [super initWithStyle:style];
     if (self) {
-		[[JJPluralForm sharedManager] setPluralRule:[kJJPluralFormRule integerValue]];
 		[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
     }
     return self;
