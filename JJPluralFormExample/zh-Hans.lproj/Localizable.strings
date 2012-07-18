@@ -7,15 +7,16 @@
 */
 
 // Specifies the plural rule form for this language
-// Set to 1 for English, 2 plural forms
+// Set to 100 for extended Chinese with 3 forms
 // 1) is 1
-// 2) everything else
+// 2) is 2
+// 3) everything else
 
 "JJ_PLURAL_FORM_RULE" =
-"1";
+"100";
 
 "N_DAYS_PLURAL_STRING" =
-"%@ day;%@ days";
+"%@ 天;%@ 天;%@ 天";
 
 "EVERY_N_DAYS_PLURAL_STRING" =
-"Daily;Every %@ days";
+"每天;每两天;每 %@ 天";

@@ -34,6 +34,7 @@
 		B35C49F915B6B97600ED5A08 /* LocalizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalizationViewController.h; sourceTree = "<group>"; };
 		B35C49FA15B6B97600ED5A08 /* LocalizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalizationViewController.m; sourceTree = "<group>"; };
 		B35C49FF15B6BC5E00ED5A08 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B35C4A9B15B6C8F700ED5A08 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +147,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hans",
 			);
 			mainGroup = B35C49C915B69B0000ED5A08;
 			productRefGroup = B35C49D515B69B0000ED5A08 /* Products */;
@@ -196,6 +198,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				B35C49FF15B6BC5E00ED5A08 /* en */,
+				B35C4A9B15B6C8F700ED5A08 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				B35C49F415B69B0000ED5A08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
