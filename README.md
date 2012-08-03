@@ -24,10 +24,6 @@ Import the `JJPluralForm` header file to your app delegate and any other source 
 
     #import "JJPluralForm.h"
 
-Initialize the JJPluralForm singleton in your app delegate's `application:didFinishLaunchingWithOptions:` with:
-
-    [[JJPluralForm sharedManager] setPluralRule:[kJJPluralFormRule integerValue]];
-
 Pick a suitable rule from `JJPluralForm.h`, and add it to the top of each Localizable.strings file.
 
 For example, adding the following:
@@ -46,6 +42,7 @@ To obtain the correct plural form 'N day(s)' expression, use:
 
     [[JJPluralForm sharedManager] pluralStringForNumber:N
                                         withPluralForms:NSLocalizedString(@"N_DAYS_PLURAL_STRING", @"")
+										usingPluralRule:[kJJPluralFormRule integerValue]
                                         localizeNumeral:YES];
                                   
 where `N` is the qualifying number. If you'd like the numbers in the returned string to be localized in the current region format, pass YES to localizeNumeral.
