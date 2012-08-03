@@ -74,16 +74,20 @@ static NSString *CellIdentifier = @"Cell";
 	switch (indexPath.section) {
 		case 0:
 			cellLabel =
-			[[JJPluralForm sharedManager] pluralStringForNumber:indexPath.row + 1
-												withPluralForms:kLocalizedNDays
-												localizeNumeral:YES];
+			[JJPluralForm pluralStringForNumber:indexPath.row + 1
+                                withPluralForms:kLocalizedNDays
+                                usingPluralRule:[kJJPluralFormRule integerValue]
+                                localizeNumeral:YES];
 			break;
 
 		case 1:
 			cellLabel =
-			[[JJPluralForm sharedManager] pluralStringForNumber:indexPath.row + 1
-												withPluralForms:kLocalizedEveryNDays
-												localizeNumeral:YES];
+
+			[JJPluralForm pluralStringForNumber:indexPath.row + 1
+                                withPluralForms:kLocalizedEveryNDays
+                                usingPluralRule:[kJJPluralFormRule integerValue]
+                                localizeNumeral:YES];
+
 			break;
 			
 		default:

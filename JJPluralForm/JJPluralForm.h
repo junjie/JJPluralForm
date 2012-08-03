@@ -21,15 +21,13 @@
 // Plural rules found in the range 100-115 are extended versions of their
 // counterparts in range 0-15 to provide additional plural forms. Only 3
 // extended plural rules are available: 100, 102 and 107.
-@property (nonatomic) NSUInteger pluralRule;
-
-+ (id)sharedManager;
 
 // Pass a semicolon separated list of plural forms of a word (e.g. day;days)
 // along with the number qualifying the word, indicating whether the number
 // should be localized in the current locale in the return string object
-- (NSString *)pluralStringForNumber:(NSUInteger)number
++ (NSString *)pluralStringForNumber:(NSUInteger)number
 					withPluralForms:(NSString *)pluralFormsString
+                    usingPluralRule:(NSUInteger)pluralRule
 					localizeNumeral:(BOOL)localizeNumeral;
 
 // Rule #0, 1 form

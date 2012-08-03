@@ -11,41 +11,50 @@
 
 #import "JJPluralForm.h"
 
-@interface JJPluralForm () {
-	NSUInteger _pluralRule;
-}
-- (NSUInteger)_indexOfPluralFormWithNumber:(NSUInteger)n;
+@interface JJPluralForm ()
++ (NSUInteger)_indexOfPluralFormWithNumber:(NSUInteger)n forRule:(NSUInteger)rule;
 @end
 
 @implementation JJPluralForm
-@synthesize pluralRule = _pluralRule;
 
 #pragma mark -
 #pragma mark Singleton methods
 
-+ (id)sharedManager {
-    static JJPluralForm *sharedPluralFormManager = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedPluralFormManager = [[self alloc] init];
-    });
-    return sharedPluralFormManager;
+-(id)init {
+    return nil;
 }
 
 #pragma mark -
 #pragma mark Public methods
 
-- (NSString *)pluralStringForNumber:(NSUInteger)number
++ (NSString *)pluralStringForNumber:(NSUInteger)number
 					withPluralForms:(NSString *)pluralFormsString
+                    usingPluralRule:(NSUInteger)pluralRule
 					localizeNumeral:(BOOL)localizeNumeral
 {
-	NSUInteger idx = [self _indexOfPluralFormWithNumber:number];
+
+    NSUInteger theRule = pluralRule;
+
+    if (pluralRule <= 15 ||
+		pluralRule == 100 ||
+		pluralRule == 102 ||
+		pluralRule == 107)
+	{
+		theRule = pluralRule;
+	}
+
+	else {
+		theRule = 0;
+		NSLog(@"Plural rule %d out of bounds, reset to rule #0", pluralRule);
+	}
+
+	NSUInteger idx = [[self class] _indexOfPluralFormWithNumber:number forRule:theRule];
 	NSArray* pluralFormsArray = [pluralFormsString componentsSeparatedByString:@";"];
 	NSUInteger numberOfForms = [pluralFormsArray count];
 
 	NSString* numberString = nil;
 	NSString* pluralForm = nil;
-	
+
 	if (localizeNumeral) {
 		numberString =
 		[NSNumberFormatter localizedStringFromNumber:@(number)
@@ -54,7 +63,7 @@
 		numberString = [@(number) stringValue];
 	}
 
-	NSAssert(idx < numberOfForms, @"Plural form %d exceeds number of plural forms (%d) in string (%@) (using plural rule %d)", idx, numberOfForms, pluralFormsString, self.pluralRule);
+	NSAssert(idx < numberOfForms, @"Plural form %d exceeds number of plural forms (%d) in string (%@) (using plural rule %d)", idx, numberOfForms, pluralFormsString, theRule);
 	
 	// Requested plural form exceeds the number of forms available.
 	// Attempt to fall back to one useable index, failing which return ERR.
@@ -76,39 +85,19 @@
 	}
 	
 	if (!pluralForm) {
-		pluralForm = pluralFormsArray[idx];
+		pluralForm = [pluralFormsArray objectAtIndex:idx];
 	}
 	
 	return [NSString stringWithFormat:pluralForm, numberString];
 }
 
 #pragma mark -
-#pragma mark Custom setters
-
-- (void)setPluralRule:(NSUInteger)ruleNumber {
-	
-	if (ruleNumber <= 15 ||
-		ruleNumber == 100 ||
-		ruleNumber == 102 ||
-		ruleNumber == 107)
-	{
-		_pluralRule = ruleNumber;
-	}
-	
-	else {
-		_pluralRule = 0;
-		NSLog(@"Plural rule %d out of bounds, reset to rule #0", ruleNumber);		
-	}
-	
-}
-
-#pragma mark -
 #pragma mark Pluralisation Helper Methods
 
 // Takes a number n and returns the plural form based on self.pluralRule
-- (NSUInteger)_indexOfPluralFormWithNumber:(NSUInteger)n {
++ (NSUInteger)_indexOfPluralFormWithNumber:(NSUInteger)n forRule:(NSUInteger)rule {
 	
-	switch (self.pluralRule) {
+	switch (rule) {
 		case 0: {
 			// Rule #0, 1 form
 			// Mostly Asian, e.g. Chinese, Japanese, Korean, Vietnamese, Thai, Lao
