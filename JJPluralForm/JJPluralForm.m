@@ -140,7 +140,7 @@
 			// 1) is 0
 			// 2) is 1
 			// 3) everything else
-			return n==1 ? 0 : (n==0 ? 1 : 2);
+			return n==0 ? 0 : (n==1 ? 1 : 2);
 			break;
 		}
 			

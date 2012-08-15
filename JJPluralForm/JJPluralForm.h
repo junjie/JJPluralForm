@@ -36,6 +36,8 @@
 //
 // Rule #1, 2 forms
 // English, German, Dutch, Norwegian, Swedish, Italian, Portuguese, Spanish, etc.
+// See also extended rule #102 to distinguish between 0, 1 and everything else.
+// For eg. No comments, 1 comment, 10 comments.
 // 	  1) is 1
 // 	  2) everything else
 //
@@ -138,7 +140,9 @@
 // 	  3) everything else
 //
 // Rule #102, extended from 2 to 3 forms by separating 'is 0 or 1'
-// French, Brazilian Portuguese
+// French, Brazilian Portuguese. Also recommended for languages in rule #1, eg.
+// English, to distinguish between 0, 1 and everything else.
+// For eg. No comments, 1 comment, 10 comments.
 // 	  1) is 0
 // 	  2) is 1
 // 	  3) everything else
