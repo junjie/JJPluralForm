@@ -58,7 +58,7 @@
 	if (localizeNumeral) {
 		numberString =
 		[NSNumberFormatter localizedStringFromNumber:@(number)
-										 numberStyle:kCFNumberFormatterNoStyle];
+										 numberStyle:NSNumberFormatterNoStyle];
 	} else {
 		numberString = [@(number) stringValue];
 	}
