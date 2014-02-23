@@ -20,5 +20,9 @@
 "N_DAYS_PLURAL_STRING" =
 "%@ day;%@ days";
 
+// This plural string uses a pipe '|' instead of semicolon as separator.
+// Thus we need to use this method -[JJPluralForm pluralStringForNumber:
+// withPluralForms:separatedBy:usingPluralRule:localizeNumeral:]
+// to specify the custom separator when localizing this string.
 "EVERY_N_DAYS_PLURAL_STRING" =
-"Daily;Every %@ days";
+"Daily|Every %@ days";

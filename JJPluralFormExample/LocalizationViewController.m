@@ -2,8 +2,8 @@
 //  LocalizationViewController.m
 //  JJPluralFormExample
 //
-//  Created by Lin Junjie (Clean Shaven Apps Pte. Ltd.) on 18/7/12.
-//  Copyright (c) 2012 Lin Junjie. All rights reserved.
+//  Created by Lin Junjie (Clean Shaven Apps Pte. Ltd.) on 22/2/14.
+//  Copyright (c) 2014 Lin Junjie. All rights reserved.
 //
 //  This Source Code Form is subject to the terms of the Mozilla Public
 //  License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -22,8 +22,14 @@ static NSString *CellIdentifier = @"Cell";
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
-    if (self) {
+    if (self)
+	{
+		self.title = @"JJPluralForm";
 		[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
+		
+		// Set up a default plural rule to use for the convenience method
+		// + pluralStringForNumber:withPluralForms:
+		[JJPluralForm setPluralRule:[kJJPluralFormRule integerValue]];
     }
     return self;
 }
@@ -40,17 +46,17 @@ static NSString *CellIdentifier = @"Cell";
     return 20;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
 	NSString* title = nil;
 	
 	switch (section) {
 		case 0:
-			title = @"N day(s)";
+			title = @"N day(s) using default separator";
 			break;
 			
 		case 1:
-			title = @"Every N day(s)";
+			title = @"Every N day(s) using custom separator";
 			break;
 			
 		default:
@@ -63,32 +69,34 @@ static NSString *CellIdentifier = @"Cell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell =
+	[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-//	if (!cell) {
-//		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-//	}
-	
 	NSString* cellLabel = nil;
 	
-	switch (indexPath.section) {
+	switch (indexPath.section)
+	{
 		case 0:
+		{
 			cellLabel =
 			[JJPluralForm pluralStringForNumber:indexPath.row + 1
-                                withPluralForms:kLocalizedNDays
-                                usingPluralRule:[kJJPluralFormRule integerValue]
-                                localizeNumeral:YES];
+                                withPluralForms:kLocalizedNDays];
 			break;
+		}
 
 		case 1:
+		{
+			// Because 'kLocalizedEveryNDays' is using a custom separator,
+			// use the longer convenience method here to specify the custom
+			// separator.
 			cellLabel =
-
 			[JJPluralForm pluralStringForNumber:indexPath.row + 1
                                 withPluralForms:kLocalizedEveryNDays
+									separatedBy:@"|"
                                 usingPluralRule:[kJJPluralFormRule integerValue]
                                 localizeNumeral:YES];
-
 			break;
+		}
 			
 		default:
 			break;

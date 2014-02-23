@@ -2,8 +2,8 @@
   Localizable.strings
   JJPluralFormExample
 
-  Created by Lin Junjie (Clean Shaven Apps Pte. Ltd.) on 18/7/12.
-  Copyright (c) 2012 Lin Junjie. All rights reserved.
+  Created by Lin Junjie (Clean Shaven Apps Pte. Ltd.) on 22/2/14.
+  Copyright (c) 2014 Lin Junjie. All rights reserved.
  
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -22,5 +22,9 @@
 "N_DAYS_PLURAL_STRING" =
 "%@ день;%@ дня;%@ дней";
 
+// This plural string uses a pipe '|' instead of semicolon as separator.
+// Thus we need to use this method -[JJPluralForm pluralStringForNumber:
+// withPluralForms:separatedBy:usingPluralRule:localizeNumeral:]
+// to specify the custom separator when localizing this string.
 "EVERY_N_DAYS_PLURAL_STRING" =
-"Каждый %@ день;Каждые %@ дня;Каждые %@ дней";
+"Каждый %@ день|Каждые %@ дня|Каждые %@ дней";
