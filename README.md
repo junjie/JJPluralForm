@@ -20,9 +20,13 @@ In Chinese, this would be '每月', '每两个月' and '每 6 个月'. A single 
 
 ## Usage
 
-Import the `JJPluralForm` header file to your app delegate and any other source code that requires localizing of plural forms.
+### Import
+
+Import the `JJPluralForm` header file to any implementation file that requires localizing of plural forms.
 
     #import "JJPluralForm.h"
+
+### Choose a Plural Rule
 
 Pick a suitable rule from `JJPluralForm.h`, and add it to the top of each Localizable.strings file.
 
@@ -33,20 +37,52 @@ For example, adding the following:
 
 to the English version of `Localizable.strings` file would specify that the English localization file uses plural rule number 1, which has 2 forms: 1) is one, and 2) everything else.
 
-To localize a phrase such as 'N day(s)', provide all plural forms in the `Localizable.strings` file in the order as listed in `JJPluralForm.h`, separated by semi-colons:
+A convenience macro `kJJPluralFormRule` is defined in `JJPluralForm.h`, which macro can be used to obtain the plural rule as defined in your `Localizable.strings`. Since this macro returns a string, you'd need to convert this to an integer with `[kJJPluralFormRule integerValue]` when passing the rule to `JJPluralForm`.
+
+### Setting a Default Plural Rule (2.0)
+
+Starting from `JJPluralForm` 2.0, you can configure `JJPluralForm` with a default plural rule with:
+
+    [JJPluralForm setPluralRule:[kJJPluralFormRule integerValue]];
+    
+This allows you to use the new method `+pluralStringForNumber:withPluralForms:` without specifying the plural rule each time you need to localize a string.
+
+### Localizing a Phrase
+
+To localize a phrase such as 'N day(s)', provide all plural forms in the `Localizable.strings` file in the order as listed in `JJPluralForm.h`, separated by semicolons:
 
     "N_DAYS_PLURAL_STRING" =
     "%@ day;%@ days";
 
-To obtain the correct plural form 'N day(s)' expression, use:
+To obtain the correct plural form for the 'N day(s)' expression, use either:
 
-    [[JJPluralForm sharedManager] pluralStringForNumber:N
-                                        withPluralForms:NSLocalizedString(@"N_DAYS_PLURAL_STRING", @"")
-										usingPluralRule:[kJJPluralFormRule integerValue]
-                                        localizeNumeral:YES];
-                                  
-where `N` is the qualifying number. If you'd like the numbers in the returned string to be localized in the current region format, pass YES to localizeNumeral.
-    
+    [JJPluralForm pluralStringForNumber:N
+    					withPluralForms:NSLocalizedString(@"N_DAYS_PLURAL_STRING", @"")
+						usingPluralRule:[kJJPluralFormRule integerValue]
+						localizeNumeral:YES];
+
+where `N` is the qualifying number. If you'd like the numbers in the returned string to be localized in the current region format, pass `YES` to localizeNumeral. This primarily affects locales using a different set of numeral symbols such as Arabic.
+
+If you've earlier configured a default plural rule with `+setPluralRule:`, you can use the shorter method to obtain the correct plural form without having to specify the plural rule each time:
+
+    [JJPluralForm pluralStringForNumber:N
+    					withPluralForms:NSLocalizedString(@"N_DAYS_PLURAL_STRING", @"")];
+
+### Using a Custom Separator (2.0)
+
+By default, `JJPluralForm` uses semicolons to separate plural forms. New in 2.0, you can specify a custom separator. For example, if `N_DAYS_PLURAL_STRING` is separated by pipe character (`|`), i.e. `%@ day|%@ days`, you can use this method to obtain the correct plural form:
+
+    [JJPluralForm pluralStringForNumber:N
+    					withPluralForms:NSLocalizedString(@"N_DAYS_PLURAL_STRING", @"")
+	    					separatedBy:@"|"
+						usingPluralRule:[kJJPluralFormRule integerValue]
+						localizeNumeral:YES];
+
+
+## CocoaPods
+
+    pod 'JJPluralForm', '~> 2.0'
+
 
 ## Downloading the code
 
@@ -55,7 +91,7 @@ The code can be downloaded at: [https://github.com/junjie/JJPluralForm](https://
 
 ## License
 
-This Source Code Form is subject to the terms ofthe Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 
 ## Suggested Attribution Format
