@@ -237,6 +237,12 @@ typedef NS_ENUM(NSUInteger, JJPluralRule) {
 + (void)setPluralRule:(JJPluralRule)rule;
 
 /**
+ * Returns the default plural rule to use if none is specified.
+ * Default: \c JJPluralRuleNotARule
+ */
++ (JJPluralRule)pluralRule;
+
+/**
  * Sets the default separator for plural forms if none is specified. By default
  * plural forms are separated by semicolons (;), so a plural form string for the
  * word 'day' in English would be 'day;days'. Default: \c ;
@@ -244,13 +250,37 @@ typedef NS_ENUM(NSUInteger, JJPluralRule) {
 + (void)setPluralFormsSeparator:(NSString *)separator;
 
 /**
- * Sets whether numbers should be localized with \c NSNumberFormatter before
- * being returned in methods that don't specify them. This primarily affects
- * locales using a different set of numeral symbols such as Arabic.
+ * Returns the default separator for plural forms. Default: \c ;
+ */
++ (NSString *)pluralFormsSeparator;
+
+/**
+ * Sets whether numbers should be localized with the \c +defaultNumberFormatter
+ * before being returned in methods that don't specify them. This primarily
+ * affects locales using a different set of numeral symbols such as Arabic.
  * Default: \c YES.
  */
 + (void)setShouldLocalizeNumeral:(BOOL)localizeNumeral;
 
+/**
+ * Returns whether numbers should be localized with the \c +defaultNumberFormatter
+ * before being returned in methods that don't specify them. Default: \c YES.
+ */
++ (BOOL)shouldLocalizeNumeral;
+
+/**
+ * Sets a custom number formatter to format numbers returned by the various
+ * \c pluralStringForNumber: methods.
+ * Default: An \c NSNumberFormatter initialized to current locale with
+ * \c NSNumberFormatterNoStyle.
+ */
++ (void)setDefaultNumberFormatter:(NSNumberFormatter *)formatter;
+
+/**
+ * Returns the default number formatter. Default: An \c NSNumberFormatter
+ * initialized to current locale with \c NSNumberFormatterNoStyle.
+ */
++ (NSNumberFormatter *)defaultNumberFormatter;
 
 /**
  * Returns a string containing \c number and the correct plural form of a word
@@ -341,5 +371,41 @@ typedef NS_ENUM(NSUInteger, JJPluralRule) {
 						separatedBy:(NSString *)separator
                     usingPluralRule:(JJPluralRule)pluralRule
 					localizeNumeral:(BOOL)localizeNumeral;
+
+/**
+ * Returns a string containing \c number and the correct plural form of a word
+ * when qualified by the number. For example, returns '1 day' when \c number is
+ * 1, but '2 days' when \c number is 2 for \c pluralRule of \c JJPluralRuleEnglish,
+ * and the \c pluralForms "%@ day;%@ days". This method allows (and requires)
+ * you to specify a custom \c separator for the forms in \c pluralForms and 
+ * a custom number formatter to format your number.
+ *
+ * @param number The number qualifying the word that we're interested in, e.g.
+ * the number '2' in '2 days'.
+ * @param pluralForms A list of different forms of the word separated by
+ * \c separator. The order of the words must follow the order of the rule
+ * specified in \c JJPluralRule. For example, English uses
+ * \c JJPluralRuleEnglish (rule #1), which takes 2 forms (is 1, everything
+ * else). If \c separator is '|', localizing the phrase 'N days' would require a
+ * string '%@ day|%@ days', where the first form ('%@ day') would be used when
+ * \c number is '1', and the second form ('%@ days') for every other number.
+ * @param separator Specifies how the different plural forms of a word (eg. day,
+ * days) in the \c pluralForms are separated
+ * @param pluralRule Specifies the grammatical rule that governs which form of
+ * word should be used for the given \c number. See \c JJPluralRule more
+ * supported rules, or read more at Mozilla's website:
+ * https://developer.mozilla.org/en/Localization_and_Plurals
+ * @param numberFormatter If provided, \c number would be localized with
+ * the formatter before being returned in the string.
+ *
+ * @returns The \c number and the correct plural form of a word when qualified
+ * by \c number (e.g. '2 days').
+ */
+
++ (NSString *)pluralStringForNumber:(NSUInteger)number
+					withPluralForms:(NSString *)pluralForms
+						separatedBy:(NSString *)separator
+					usingPluralRule:(JJPluralRule)pluralRule
+					numberFormatter:(NSNumberFormatter *)numberFormatter;
 
 @end

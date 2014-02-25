@@ -11,9 +11,10 @@
 
 #import "JJPluralForm.h"
 
-JJPluralRule _defaultPluralRule = JJPluralRuleNotARule;
-NSString *_defaultSeparator = @";";
-BOOL _defaultLocalizeNumber = YES;
+static JJPluralRule _defaultPluralRule = JJPluralRuleNotARule;
+static NSString *_defaultSeparator = @";";
+static BOOL _defaultLocalizeNumber = YES;
+static NSNumberFormatter *_defaultNumberFormatter = nil;
 
 @interface JJPluralForm ()
 
@@ -21,9 +22,20 @@ BOOL _defaultLocalizeNumber = YES;
 
 @implementation JJPluralForm
 
++ (void)initialize
+{
+	_defaultNumberFormatter = [NSNumberFormatter new];
+	[_defaultNumberFormatter setNumberStyle:NSNumberFormatterNoStyle];
+}
+
 + (void)setPluralRule:(JJPluralRule)rule
 {
 	_defaultPluralRule = rule;
+}
+
++ (JJPluralRule)pluralRule
+{
+	return _defaultPluralRule;
 }
 
 + (void)setPluralFormsSeparator:(NSString *)separator
@@ -31,10 +43,32 @@ BOOL _defaultLocalizeNumber = YES;
 	_defaultSeparator = separator;
 }
 
++ (NSString *)pluralFormsSeparator
+{
+	return _defaultSeparator;
+}
+
 + (void)setShouldLocalizeNumeral:(BOOL)localizeNumeral
 {
 	_defaultLocalizeNumber = localizeNumeral;
 }
+
++ (BOOL)shouldLocalizeNumeral
+{
+	return _defaultLocalizeNumber;
+}
+
++ (void)setDefaultNumberFormatter:(NSNumberFormatter *)formatter
+{
+	_defaultNumberFormatter = [formatter copy];
+}
+
++ (NSNumberFormatter *)defaultNumberFormatter
+{
+	return _defaultNumberFormatter;
+}
+
+#pragma mark - Methods to Obtain Plural Form
 
 + (NSString *)pluralStringForNumber:(NSUInteger)number
 					withPluralForms:(NSString *)pluralForms
@@ -63,6 +97,24 @@ BOOL _defaultLocalizeNumber = YES;
 						separatedBy:(NSString *)separator
 					usingPluralRule:(JJPluralRule)pluralRule
 					localizeNumeral:(BOOL)localizeNumeral
+{
+	NSNumberFormatter *formatter =
+	localizeNumeral ?
+	_defaultNumberFormatter :
+	nil;
+	
+	return [self pluralStringForNumber:number
+					   withPluralForms:pluralForms
+						   separatedBy:separator
+					   usingPluralRule:pluralRule
+					   numberFormatter:formatter];
+}
+
++ (NSString *)pluralStringForNumber:(NSUInteger)number
+					withPluralForms:(NSString *)pluralForms
+						separatedBy:(NSString *)separator
+					usingPluralRule:(JJPluralRule)pluralRule
+					numberFormatter:(NSNumberFormatter *)numberFormatter
 {
 	NSUInteger expectedNumberOfForms = NSNotFound;
 	NSUInteger idx =
@@ -95,11 +147,9 @@ BOOL _defaultLocalizeNumber = YES;
 	NSString* numberString = nil;
 	NSString* pluralForm = nil;
 
-	if (localizeNumeral)
+	if (numberFormatter)
 	{
-		numberString =
-		[NSNumberFormatter localizedStringFromNumber:@(number)
-										 numberStyle:NSNumberFormatterNoStyle];
+		numberString = [numberFormatter stringFromNumber:@(number)];
 	}
 	else
 	{

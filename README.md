@@ -1,4 +1,4 @@
-# JJPluralForm
+# JJPluralForm 2.1
 by Lin Junjie ([@jjlin](http://twitter.com/jjlin))
 
 ![JJPluralForm Example Project Screenshot](https://github.com/junjie/JJPluralForm/raw/master/JJPluralForms.png)
@@ -78,10 +78,33 @@ By default, `JJPluralForm` uses semicolons to separate plural forms. New in 2.0,
 						usingPluralRule:[kJJPluralFormRule integerValue]
 						localizeNumeral:YES];
 
+### Using a Custom Number Formatter (2.1)
+
+By default, `JJPluralForms` initializes and caches an `NSNumberFormatter` set to a `numberStyle` of `NSNumberFormatterNoStyle`. Despite the style name, formatting numbers with this formatter has the effect of making numerals appear in the correct script of the region (eg. [Eastern Arabic numerals](http://en.wikipedia.org/wiki/Eastern_Arabic_numerals) for Arabic users).
+
+New in 2.1, you can provide your own cached number formatter using `+setDefaultNumberFormatter:`. This allows you to customize all aspects of how numbers are formatted when they are localized with `JJPluralForm`, for instance, by separating groups of numbers (eg. 1,000,000 vs 1000000).
+
+When calling the following method
+
+    - pluralStringForNumber:withPluralForms:
+
+the number is formatted and localized with the cached number formatter unless it has been disabled with `+setShouldLocalizeNumeral:`. When calling the following methods
+
+    - pluralStringForNumber:withPluralForms:usingPluralRule:localizeNumeral:
+    - pluralStringForNumber:withPluralForms:separatedBy:usingPluralRule:localizeNumeral:
+
+the number is formatted and localized with the cached number formatter only if `localizedNumeral` is `YES`.
+
+New in 2.1, you can provide an ad-hoc `NSNumberFormatter` to format the number for each call of `pluralStringForNumber:` using the following method:
+
+    - pluralStringForNumber:withPluralForms:separatedBy:usingPluralRule:numberFormatter:
+
+The sample code further illustrates the use of this method.
+
 
 ## CocoaPods
 
-    pod 'JJPluralForm', '~> 2.0'
+    pod 'JJPluralForm', '~> 2.1'
 
 
 ## Downloading the code

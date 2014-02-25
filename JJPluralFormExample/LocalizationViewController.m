@@ -17,6 +17,10 @@
 
 static NSString *CellIdentifier = @"Cell";
 
+@interface LocalizationViewController ()
+@property (copy, nonatomic) NSNumberFormatter *groupSeparatedFormatter;
+@end
+
 @implementation LocalizationViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -34,31 +38,58 @@ static NSString *CellIdentifier = @"Cell";
     return self;
 }
 
+#pragma mark - Lazy Accessor
+
+- (NSNumberFormatter *)groupSeparatedFormatter
+{
+	if (_groupSeparatedFormatter)
+	{
+		return _groupSeparatedFormatter;
+	}
+	
+	NSNumberFormatter *formatter = [NSNumberFormatter new];
+	[formatter setNumberStyle:NSNumberFormatterNoStyle];
+	[formatter setUsesGroupingSeparator:YES];
+	[formatter setGroupingSeparator:[[NSLocale currentLocale] objectForKey:NSLocaleGroupingSeparator]];
+	[formatter setGroupingSize:3];
+	
+	_groupSeparatedFormatter = [formatter copy];
+	return _groupSeparatedFormatter;
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 20;
+    return 10;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
 	NSString* title = nil;
 	
-	switch (section) {
+	switch (section)
+	{
 		case 0:
+		{
 			title = @"N day(s) using default separator";
 			break;
-			
+		}
 		case 1:
+		{
 			title = @"Every N day(s) using custom separator";
 			break;
-			
+		}
+		case 2:
+		{
+			title = @"N day(s) using custom number formatter";
+			break;
+		}
 		default:
 			break;
 	}
@@ -95,6 +126,18 @@ static NSString *CellIdentifier = @"Cell";
 									separatedBy:@"|"
                                 usingPluralRule:[kJJPluralFormRule integerValue]
                                 localizeNumeral:YES];
+			break;
+		}
+			
+		case 2:
+		{
+			// Use a custom number formatter to format the large numbers
+			cellLabel =
+			[JJPluralForm pluralStringForNumber:(indexPath.row + 1) * 10000
+                                withPluralForms:kLocalizedNDays
+									separatedBy:[JJPluralForm pluralFormsSeparator]
+								usingPluralRule:[kJJPluralFormRule integerValue]
+								numberFormatter:self.groupSeparatedFormatter];
 			break;
 		}
 			

@@ -10,7 +10,7 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
-// Rule #12, 5 forms
+// Rule #12, 6 forms
 // Arabic
 // 	  1) is 1
 // 	  2) is 2
@@ -22,7 +22,7 @@
 "12";
 
 "N_DAYS_PLURAL_STRING" =
-"يوم %@;يومين %@;أيام %@;يوم %@;أيام;يوم %@";
+"يوم %@;يومين %@;أيام %@;يوم %@;أيام %@;يوم %@";
 
 // This plural string uses a pipe '|' instead of semicolon as separator.
 // Thus we need to use this method -[JJPluralForm pluralStringForNumber:
