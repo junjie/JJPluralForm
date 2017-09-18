@@ -325,7 +325,7 @@ typedef NS_ENUM(NSUInteger, JJPluralRule) {
  * word should be used for the given \c number. See \c JJPluralRule more
  * supported rules, or read more at Mozilla's website:
  * https://developer.mozilla.org/en/Localization_and_Plurals
- * @param localizedNumeral If \c YES, \c number should be localized with
+ * @param localizeNumeral If \c YES, \c number should be localized with
  * \c NSNumberFormatter before being returned in the string. This primarily
  * affects locales using a different set of numeral symbols such as Arabic.
  *
@@ -359,7 +359,7 @@ typedef NS_ENUM(NSUInteger, JJPluralRule) {
  * word should be used for the given \c number. See \c JJPluralRule more
  * supported rules, or read more at Mozilla's website:
  * https://developer.mozilla.org/en/Localization_and_Plurals
- * @param localizedNumeral If \c YES, \c number should be localized with
+ * @param localizeNumeral If \c YES, \c number should be localized with
  * \c NSNumberFormatter before being returned in the string. This primarily
  * affects locales using a different set of numeral symbols such as Arabic.
  *
